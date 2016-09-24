@@ -9,6 +9,12 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     name: DataTypes.STRING,
+    description: DataTypes.STRING,
+    rating: DataTypes.INTEGER,
+    imageThumbnail: DataTypes.STRING,
+    servingSize: DataTypes.INTEGER,
+    ingredients: DataTypes.ARRAY(DataTypes.JSON),
+    steps: DataTypes.ARRAY(DataTypes.STRING),
     info: DataTypes.STRING,
     active: DataTypes.BOOLEAN
   });

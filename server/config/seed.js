@@ -7,6 +7,7 @@
 import sqldb from '../sqldb';
 var Thing = sqldb.Thing;
 var User = sqldb.User;
+var Recipes = sqldb.Recipes;
 
 Thing.sync()
   .then(() => {
@@ -60,5 +61,32 @@ User.sync()
     }])
     .then(() => {
       console.log('finished populating users');
+    });
+  });
+
+var data = [
+    {
+      'name': 'Burrito',
+      'description': 'Awesome Mexican food',
+      'rating': 5,
+      'imageThumbnail': 'http://esq.h-cdn.co/assets/cm/15/06/54d460caaf74c_-_sofritas_burrito_fixed_at.png',
+      'ingredients': [],
+      'steps': []
+    },
+    {
+      'name':'Taco',
+      'description': 'Awesome Mexican food',
+      'rating': 5,
+      'imageThumbnail': 'www.google.com',
+      'ingredients': [],
+      'steps': []
+    }
+];
+Recipes.sync({force:true})
+  .then(() => Recipes.destroy({ where: {} }))
+  .then(() => {
+    Recipes.bulkCreate(data)
+    .then(() => {
+      console.log('finished populating recipes');
     });
   });
