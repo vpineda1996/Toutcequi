@@ -7,14 +7,7 @@ module.exports = {
 
   // Sequelize connection opions
   sequelize: {
-    uri: 'sqlite://',
-    options: {
-      logging: false,
-      storage: 'dev.sqlite',
-      define: {
-        timestamps: false
-      }
-    }
+    uri: 'postgres://<username>:<password>@localhost:5432/hackathon'
   },
 
   // Seed database on startup
