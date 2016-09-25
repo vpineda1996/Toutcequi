@@ -27,17 +27,24 @@ export class RecipelistComponent {
   $scope;
   $http;
   test: string;
+  $rootScope;
 
-  constructor($http, $location, $scope) {
+  constructor($http, $location, $scope, $rootScope) {
     'ngInject';
     this.$http = $http;
     this.$scope = $scope;
+    this.$rootScope = $rootScope;
+    this.$location = $location;
+    if (!this.$rootScope.recipes) {
+      this.$location.path("/");
+    }
   }
 
   $onInit (){
-    this.$http.get('http://172.25.96.206:3000/api/recipes').then(response => {
-      this.recipes = response.data;
-    });
+    // this.$http.get('http://172.25.96.206:3000/api/recipes').then(response => {
+    //   this.recipes = response.data;
+    // });
+    this.recipes = this.$rootScope.recipes;
     this.$scope.range = createArray;
   }
 }

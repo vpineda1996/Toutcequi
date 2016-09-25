@@ -10,6 +10,12 @@ footer.footer {
   height: 200px;
 }
 
+footer, 
 .footer {
   background-color: #fff;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.footer {
+  border: none;
 }
