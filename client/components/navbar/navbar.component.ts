@@ -19,6 +19,9 @@ export class NavbarComponent {
   },{
     'title': 'Add Recipe',
     'link': '/add'
+  }, {
+    'title' : 'Shopping List', 
+    'link' : '/shoppinglist'
   }];
   ingredient: IngredientObject;
   formOptions: FormOptions;
@@ -50,7 +53,8 @@ export class NavbarComponent {
   }
 
   isActive(route) {
-    if (this.$location.path() === '/login' || this.$location.path() === '/signup' || this.$location.path() === '/add') {
+    if (this.$location.path() === '/login' || this.$location.path() === '/signup' || 
+        this.$location.path() === '/add') {
         this.hideIngredientPane = true;
     } else {
       this.hideIngredientPane = false;
@@ -71,12 +75,14 @@ export class NavbarComponent {
 
   getRecipes() {
     this.showSearchEmptyError = false;
+    var threshold = (this.$scope.formOptions && this.$scope.formOptions.threshold) || 5;
     var oParams = {
       ingredients: this.ingredientTags.join(),
-      threshold: parseInt(this.$scope.formOptions.threshold, 10) || 0
+      threshold: parseInt(threshold, 10)
     };
+    var url = this.ingredientTags.length === 0 ? '/api/recipes' : '/api/recipes/getRecipes';
     this.$http({
-      url: '/api/recipes/getRecipes',
+      url: url,
       method: 'GET',
       params: oParams
     }).then(response => {

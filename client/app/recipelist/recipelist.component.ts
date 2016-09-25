@@ -72,7 +72,15 @@ export class RecipelistComponent {
     }
     var missingIngredient = this.expandedRecipe.ingredients[index];
     this.$rootScope.shoppingList.push(missingIngredient);
-    console.log(this.$rootScope.shoppingList);
+
+    this.$scope.shoppingListDetails = this.$rootScope.shoppingList.map((item)=>{
+      return {
+        item: item, 
+        checked: false
+      }
+    });
+
+    localStorage.setItem("shoppingList", JSON.stringify(this.$scope.shoppingListDetails));
   }
 }
 

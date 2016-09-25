@@ -1,0 +1,11 @@
+<div class = "shopping-list-wrapper">
+    <h4>Shopping List</h4>
+    <ul class="list">
+        <li ng-repeat="ingredient in shoppingList" ng-click="$ctrl.triggerChecked($index)" ng-class="{checked: ingredient.checked, unchecked: !ingredient.checked}">
+            {{ingredient.item}} <i class="fa fa-times-circle-o" aria-hidden="true" ng-click="$ctrl.removeShoppingItem($index)"></i>
+        </li>
+    </ul>
+    <div class = "no-items-message shopping-list-no-items" ng-show="shoppingList.length === 0">
+        You have nothing saved. Search some recipes and add ingredients.
+    </div>
+</div>

@@ -38,11 +38,22 @@
   height: 300px;
   // filter: brightness(90%);
 }
+
 .container-text-wrapper {
     background-color: rgba(0,0,0,0.2);
     width: 40%;
     margin-left: 30%;
     margin-top: 6%;
+}
+
+@media only screen and (max-width: 520px) {
+  .container-text-wrapper {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .page-header {
+    width: 100%;
+  }
 }
 
 .container h1{
@@ -103,6 +114,25 @@
       li {
           display: inline-block;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 520px) { 
+  .homepage-three {
+    -webkit-flex-direction: column;
+            flex-direction: column;
+
+    .homepage-section-one, 
+    .homepage-section-two, 
+    .homepage-section-three {
+      width: 90%;
+      margin-left: 5%;
+      padding-bottom: 50px;
+    }
+
+    .homepage-section-three {
+      padding-bottom: 0;
     }
   }
 }

@@ -214,3 +214,63 @@
         }
     }
 }
+
+.no-items-message {
+    width: 100%;
+    height: 200px;
+}
+
+@media only screen and (max-width: 520px) {
+    .extend-top-half {
+        flex-direction: column !important;
+    }
+
+    .extended-image {
+        width: auto;
+        padding: 20px;
+        align-self: flex-start;
+        img {
+            width: 80% !important;
+            height: auto;
+            margin-left: 10%;
+        }
+    }
+
+    .extend-bottom-half {
+        flex-direction: column !important;
+        text-align: center;
+        width: 90% !important;
+        margin-left: 5% !important;
+    }
+
+    .bottom-half-left {
+        width: 90% !important;
+        margin-left: 5% !important;
+        ul {
+            padding: 0 !important;
+        }
+    }
+    .bottom-half-right {
+        width: 90% !important;
+        margin-left: 5% !important;
+        ol {
+            padding: 0 !important;
+        }
+    }
+
+    .extended-top-half-details-wrapper {
+        width: 100% !important;
+        img {
+            margin-left: 33% !important;
+
+        }
+    }
+
+    .extended-top-half-details {
+        width: 90% !important;
+    }
+
+    .extended-recipe-description {
+        width: 250px !important;
+    }
+}
