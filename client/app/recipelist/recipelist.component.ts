@@ -1,7 +1,7 @@
 'use strict';
 const angular = require('angular');
 const ngRoute = require('angular-route');
-const $ = require('jQuery');
+const $ = require('jquery');
 
 
 import routes from './recipelist.routes';
@@ -9,16 +9,17 @@ import routes from './recipelist.routes';
 export interface RecipeElement {
   name: string;
   rating: number;
-  imageThumbnail: string;
-  _id: number;
+  imageThumbnail?: string;
+  imageBackground?: string;
+  _id?: number;
   description: string;
-  ingredients: any[];
+  ingredients: string[];
   servingSize: number;
   steps: any[];
-  info: any;
-  active: boolean;
-  createdAt: string;
-  updatedAt: string;
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  quantity: string[];
 };
 
 export class RecipelistComponent {
