@@ -72,8 +72,8 @@ export class NavbarComponent {
   }
 
   getRecipes() {
-    if (this.ingredientTags.length === 0) {
-      this.showSearchEmptyError = true;
+    if (this.ingredientTags.length === 0 && false) { //do we want this to be blocking?
+      this.showSearchEmptyError = false;//true; do we want this?
     } else {
       this.showSearchEmptyError = false;
       var oParams = {
