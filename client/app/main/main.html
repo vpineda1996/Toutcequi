@@ -1,28 +1,50 @@
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <div class="container-text-wrapper">
+      <div class="page-header">
+        <h1>Toutcequi <small>Too-ski</small></h1>
+        <p class="lead">Fast, easy dishes for every meal of the week.</p>
+      </div>
+      <!--<h1>Tout-ce-qui</h1>-->
+    </div>
   </div>
 </header>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
-        <li><a href="#" uib-tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="$ctrl.deleteThing(thing)">&times;</button></a></li>
-      </ul>
+<div class="homepage-three">
+  <div class="homepage-section-one">
+    <div class="homepage-section-one-icon">
+      <i class="fa fa-cutlery" aria-hidden="true"></i>
+      <h4>Cook Freely.</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis nulla eget dui fringilla molestie at et ipsum. In hac
+        habitasse platea dictumst. Aliquam lacinia fermentum tellus. In aliquet leo id ante maximus, nec ullamcorper urna
+        accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in eros mollis, ullamcorper nunc elementum,
+        mollis augue. Morbi elementum tincidunt risus sit amet aliquet.
+      </p>
     </div>
   </div>
-
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="$ctrl.newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="$ctrl.addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
+  <div class="homepage-section-two">
+    <div class="homepage-section-two-icon">
+      <i class="fa fa-heartbeat" aria-hidden="true"></i>
+      <h4>Cook Smart.</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis nulla eget dui fringilla molestie at et ipsum. In hac
+        habitasse platea dictumst. Aliquam lacinia fermentum tellus. In aliquet leo id ante maximus, nec ullamcorper urna
+        accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in eros mollis, ullamcorper nunc elementum,
+        mollis augue. Morbi elementum tincidunt risus sit amet aliquet.
+      </p>
+    </div>
+  </div>
+  <div class="homepage-section-three">
+    <div class="homepage-section-two-icon">
+      <i class="fa fa-usd" aria-hidden="true"></i>
+      <h4>Cook Cheap.</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis nulla eget dui fringilla molestie at et ipsum. In hac
+        habitasse platea dictumst. Aliquam lacinia fermentum tellus. In aliquet leo id ante maximus, nec ullamcorper urna
+        accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in eros mollis, ullamcorper nunc elementum,
+        mollis augue. Morbi elementum tincidunt risus sit amet aliquet.
+      </p>
+    </div>
+  </div>
 </div>

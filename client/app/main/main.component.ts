@@ -35,6 +35,10 @@ export class MainController {
   deleteThing(thing) {
     this.$http.delete('/api/things/' + thing._id);
   }
+
+  addNewIngredientToList(newIngredient) {
+    console.log(newIngredient);
+  }
 }
 
 export default angular.module('hackathonApp.main', [
