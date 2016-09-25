@@ -44,9 +44,6 @@ export class NavbarComponent {
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.$http = $http;
     this.$route = $route;
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    });
   }
 
   isActive(route) {
