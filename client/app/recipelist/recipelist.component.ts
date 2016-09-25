@@ -1,6 +1,7 @@
 'use strict';
 const angular = require('angular');
 const ngRoute = require('angular-route');
+const $ = require('jQuery');
 
 
 import routes from './recipelist.routes';
@@ -56,9 +57,21 @@ export class RecipelistComponent {
   }
 
   public onClick(recipe: RecipeElement) {
-    // TODO, call
     this.expandedRecipe = recipe;
     $("#exended-recipe").addClass('show');
+  }
+
+  public closeExtenedPopup() {
+    $("#exended-recipe").removeClass('show');
+  }
+
+  public addToShoppingList(index) {
+    if (!this.$rootScope.shoppingList) {
+      this.$rootScope.shoppingList = [];
+    }
+    var missingIngredient = this.expandedRecipe.ingredients[index];
+    this.$rootScope.shoppingList.push(missingIngredient);
+    console.log(this.$rootScope.shoppingList);
   }
 }
 
