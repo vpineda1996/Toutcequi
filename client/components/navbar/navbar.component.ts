@@ -9,16 +9,22 @@ interface IngredientObject {
 };
 
 interface FormOptions {
-  threshold: string
+  threshold: string;
 };
 
 export class NavbarComponent {
   menu = [{
     'title': 'Home',
     'link': '/'
+  },{
+    'title': 'Add Recipe',
+    'link': '/add'
+  }, {
+    'title' : 'Shopping List', 
+    'link' : '/shoppinglist'
   }];
   ingredient: IngredientObject;
-  formOptions: FormOptions
+  formOptions: FormOptions;
   $location;
   $scope;
   $rootScope;
@@ -30,7 +36,6 @@ export class NavbarComponent {
   ingredientTags: Array<string> = [];
   getMatchingRecipes: Function;
   showSearchEmptyError = false;
-  baseUrl: string;
   $route;
   hideIngredientPane = false;
 
@@ -45,14 +50,11 @@ export class NavbarComponent {
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.$http = $http;
     this.$route = $route;
-    this.baseUrl = 'http://172.25.97.63:3000';
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    });
   }
 
   isActive(route) {
-    if (this.$location.path() === '/login' || this.$location.path() === '/signup') {
+    if (this.$location.path() === '/login' || this.$location.path() === '/signup' || 
+        this.$location.path() === '/add') {
         this.hideIngredientPane = true;
     } else {
       this.hideIngredientPane = false;
@@ -72,23 +74,25 @@ export class NavbarComponent {
   }
 
   getRecipes() {
-    if (this.ingredientTags.length === 0 && false) { //do we want this to be blocking?
-      this.showSearchEmptyError = false;//true; do we want this?
-    } else {
-      this.showSearchEmptyError = false;
-      var oParams = {
-        ingredients: this.ingredientTags,
-        threshold: parseInt(this.$scope.showSearchEmptyError, 10) || 0
+    this.showSearchEmptyError = false;
+    var threshold = (this.$scope.formOptions && this.$scope.formOptions.threshold) || 5;
+    var oParams = {
+      ingredients: this.ingredientTags.join(),
+      threshold: parseInt(threshold, 10)
+    };
+    var url = this.ingredientTags.length === 0 ? '/api/recipes' : '/api/recipes/getRecipes';
+    this.$http({
+      url: url,
+      method: 'GET',
+      params: oParams
+    }).then(response => {
+      this.$rootScope.recipes = response.data;
+      if (this.$location.path() !== '/recipelist') {
+        this.$location.path('/recipelist');
+      } else {
+        this.$route.reload();
       }
-      this.$http.get('http://172.25.96.206:3000/api/recipes?ingredients=' + this.ingredientTags.join(",")).then(response => {
-        this.$rootScope.recipes = response.data;
-        if (this.$location.path() !== '/recipelist') {
-          this.$location.path('/recipelist');
-        } else {
-          this.$route.reload();
-        }
-      });
-    }
+    });
   }
 }
 

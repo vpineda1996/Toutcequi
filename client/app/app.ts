@@ -21,10 +21,12 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
+import shoppingList from './shoppinglist/shoppinglist.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import recipielist from './recipelist/recipelist.component';
+import addRecipe from './add/add.component';
 
 
 import './app.scss';
@@ -43,10 +45,11 @@ angular.module('hackathonApp', [
   account,
   admin,  navbar,
   footer,
-  recipielist,
+  recipielist, addRecipe,
   main,
   constants,
   socket,
+  shoppingList,
   util, dmService
 ])
   .config(routeConfig)

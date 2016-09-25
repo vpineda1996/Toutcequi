@@ -1,0 +1,19 @@
+.add-form {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .number-input {
+        width: 6em;
+    }
+
+    .ingredients-element {
+        width: 100%;
+    }
+
+    .text-area-steps {
+        width: 60%;
+        max-width: 400px;
+    }
+}

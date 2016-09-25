@@ -1,5 +1,5 @@
 'use strict';
-
+import * as auth from '../../auth/auth.service';
 var express = require('express');
 var controller = require('./recipes.controller');
 
@@ -15,7 +15,7 @@ router.use(function (req, res, next) {
 router.get('/', controller.index);
 router.get('/getrecipes', controller.getRecipes);
 router.get('/:id', controller.show);
-router.post('/', controller.create);
+router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', controller.upsert);
 router.patch('/:id', controller.patch);
 router.delete('/:id', controller.destroy);

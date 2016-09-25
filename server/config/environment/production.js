@@ -24,5 +24,8 @@ module.exports = {
         timestamps: false
       }
     }
-  }
+  },
+
+  seedDB: true
+
 };

@@ -33,9 +33,11 @@ body {
 
 // Component styles are injected through gulp
 /* inject:scss */
+@import 'add/add';
 @import 'admin/admin';
 @import 'main/main';
 @import 'recipelist/recipelist';
+@import 'shoppinglist/shoppinglist';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/oauth-buttons/oauth-buttons';
@@ -97,6 +99,7 @@ body {
 .navbar.navbar-default.navbar-static-top {
     margin-bottom: 0;
 }
+
 
 .navbar-ingredients-containter {
   width: 100%;
@@ -170,6 +173,27 @@ body {
   background-color: #fff !important;
   .navbar-brand {
     color: #000 !important;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .navbar-ingredients-containter {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 50px;
+    .ingredients-wrapper {
+      width: 90%;
+      margin-left: 5%;
+    }
+    .ingredients-filter {
+      width: 90%;
+      margin-left: 5%;
+    } 
+  }
+
+  .ingredient-tag {
+    width: 30% !important;
   }
 }
 
@@ -252,5 +276,16 @@ body {
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+@media only screen and (max-width: 520px) {
+  .signup-form-group{
+    width: 90% !important;
+    margin-left: 5% !important;
+  }
+
+  .signup-btn {
+    margin-bottom: 10px !important;
+  }
 }
 
