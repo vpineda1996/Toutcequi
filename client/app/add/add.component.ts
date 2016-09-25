@@ -12,6 +12,7 @@ interface Ingredient {
 
 export class AddComponent {
   keyCounter = 0;
+  stepCounter = 1;
   $scope;
   $location;
   steps = [];
@@ -25,7 +26,7 @@ export class AddComponent {
       key: this.keyCounter++
     });
     this.steps.push({
-      number: 1,
+      number: this.stepCounter++,
       text: "Cut the tomato in half"
     });
   }
@@ -64,7 +65,7 @@ export class AddComponent {
   private createStep() {
     this.steps.push({
       name: 'man',
-      key: this.keyCounter++
+      number: this.stepCounter++
     });
   }
 
@@ -78,6 +79,7 @@ export class AddComponent {
     if (typeof index !== 'undefined') {
       this.steps.splice(index, 1);
     }
+    this.stepCounter--;
   }
 }
 

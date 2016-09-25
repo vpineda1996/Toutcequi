@@ -1,36 +1,39 @@
 <form class="add-form">
-    <div class="form-group">
+    <div class="form-group form-inline">
         <label for="name-label">Name</label>
         <input class="form-control" id="name-input" placeholder="Watman">
     </div>
+
+    <!--Ingredients Section-->
+
     <div class="form-group">
         <label for="steps-label">Ingredients</label>
-        <fieldset data-ng-repeat="ingredients in FormAddController.ingredients">
-            <input type="number" ng-model="ingredients.quantity" name="" placeholder="1" maxlength="4" size="4">
-            <select>
+        <fieldset class="form-inline ingredients-element" data-ng-repeat="ingredients in FormAddController.ingredients">
+            <input class="form-control number-input" type="number" ng-model="ingredients.quantity" name="" placeholder="1" maxlength="4" size="4">
+            <select class="form-control">
                 <option>grams</option>
                 <option>liters</option>
                 <option>cups</option>
             </select>
-            <input type="text" ng-model="ingredients.name" name="" placeholder="Enter mobile number">
-            <button class="remove" ng-show='!$first' ng-click="removeIngredient(ingredients)">-</button>
+            <input class="form-control ingredients-element-name" type="text" ng-model="ingredients.name" name="" placeholder="Enter mobile number">
+            <button class="btn btn-danger remove form-control" ng-show='!$first' ng-click="removeIngredient(ingredients)">-</button>
         </fieldset>
-        <button class="addfields" ng-click="addIngredient()">Add Ingredients</button>
+        <button class="btn btn-default addfields" ng-click="addIngredient()">Add Ingredients</button>
     </div>
+
+    <!--Steps Section-->
+
     <div class="form-group">
         <label for="steps-label">Steps</label>
-        <fieldset data-ng-repeat="step in FormAddController.steps">
-            <input type="number" ng-model="step.quantity" name="" placeholder="1" maxlength="4" size="4">
-            <select>
-                <option>grams</option>
-                <option>liters</option>
-                <option>cups</option>
-            </select>
-            <input type="text" ng-model="step.name" name="" placeholder="Enter mobile number">
-            <button class="remove" ng-show='!$first' ng-click="removeStep(step)">-</button>
+        <fieldset class="form-inline" data-ng-repeat="step in FormAddController.steps">
+            <input type="number" class="form-control number-input" ng-model="step.number" placeholder="1" maxlength="4" size="4">
+            <textarea class="form-control text-area-steps" rows="1"></textarea>
+            <button class="btn btn-danger remove form-control" ng-show='!$first' ng-click="removeStep(step)">-</button>
         </fieldset>
-        <button class="addfields" ng-click="createStep()">Add Step</button>
+        <button class="btn btn-default addfields" ng-click="createStep()">Add Step</button>
     </div>
+
+
     <div class="checkbox">
         <label>
       <input type="checkbox"> Imagine you are someone’s shadow for a day
