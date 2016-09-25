@@ -143,15 +143,14 @@ export function destroy(req, res) {
 // Gets all recipes given a list of ingredients in a json object
 export function getRecipes(req, res){
   var sIngredients = req.query.ingredients;
-  var aIngredients = sIngredients.split(','); // array of ingredients
-  var a1 = aIngredients.map( ingredient => ingredient.toLowerCase());
+  var aIngredients = sIngredients.split(',').map( ingredient => ingredient.toLowerCase());
   var iThreshold = req.query.threshold; // maximum # of missing ingredients
   var sSortOn = req.query.sorton; // one of rating, highest missing ingredient, lowest
   var sFilter = req.query.filter; // One of category, time to cook, or difficulty
   return Recipes.findAll({
     where: {
       'ingredients': {
-        overlap: a1
+        overlap: aIngredients
       }
       // raw: true
       // [this.sequelize.fn('array_length', this.sequelize.col('ingredients'), 1)] : 1
@@ -176,14 +175,12 @@ export function getRecipes(req, res){
       //
       // oResultSet.count = aFilteredIngredients.length;
       // oResultSet.rows = aFilteredIngredients;
-      console.log(oResultSet); // Array of Data Values
       var aFilteredIngredients = [];
       aResultSet.forEach(function(oDataValue){
         var aDiff = oDataValue.ingredients.filter(ingredient =>
           aIngredients.indexOf(ingredient) < 0);
-
-        if(aDiff.length <= iThreshold) {
-          aFilteredIngredients.push.apply(oDataValue);
+        if (aDiff.length <= iThreshold) {
+          aFilteredIngredients.push(oDataValue);
         }
       })
       return aFilteredIngredients;
