@@ -20,8 +20,11 @@ public interface RecipesService {
     @GET("/api/recipes/")
     Call<List<Recipe>> getRecipes();
 
+    @POST("/api/recipes/")
+    Call<List<Recipe>> createRecipe(@Body Recipe recipe);
+
     @GET("/api/recipes/getrecipes?")
-    Call<List<Recipe>> getRecipes(@Query("ingredients")String ingredients);
+    Call<List<Recipe>> getRecipes(@Query("ingredients")String ingredients, @Query("threshold") int threshold);
 
     @POST("/auth/local")
     Call<TokenResponse> login(@Body LoginRequest loginRequest);

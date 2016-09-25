@@ -40,7 +40,7 @@ public class ApiManager {
     private Retrofit buildRetrofitAdapter() {
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl("http://172.25.96.206:3000/");
+                .baseUrl("http://10.10.32.153:3000/");
 
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
         if (BuildConfig.DEBUG) {

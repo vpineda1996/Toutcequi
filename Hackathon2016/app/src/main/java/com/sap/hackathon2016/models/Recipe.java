@@ -1,5 +1,6 @@
 package com.sap.hackathon2016.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,9 +16,10 @@ public class Recipe {
     public float rating;
     public String imageThumbnail;
     public String imageBackground;
-    public String[] steps;
+    public List<String> steps = new ArrayList<>();
     public String userImage;
+    public int servingSize;
 
-    public List<String> ingredients;
-
+    public List<String> ingredients = new ArrayList<>();
+    public List<String> missingIngredients = new ArrayList<>();
 }

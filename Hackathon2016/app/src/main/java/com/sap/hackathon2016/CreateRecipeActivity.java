@@ -36,6 +36,11 @@ public class CreateRecipeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    @OnClick(R.id.back_icon)
+    public void onBackIconPressed() {
+        onBackPressed();
+    }
+
     @OnClick(R.id.add_step)
     public void onAddStepClicked() {
 

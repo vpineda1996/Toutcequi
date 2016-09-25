@@ -73,6 +73,54 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         recipeViewHolder.rating.setText(String.valueOf(recipe.rating));
         recipeViewHolder.ratingBar.setRating(recipe.rating);
 
+        if (!recipe.ingredients.isEmpty()) {
+            String fullIngredientsText = "Ingredients: \n";
+            for (int i = 0; i < recipe.ingredients.size(); i++) {
+                String ingredientString = recipe.ingredients.get(i);
+                ingredientString = "- " + ingredientString + "\n";
+                fullIngredientsText += ingredientString;
+            }
+            recipeViewHolder.ingredients.setText(fullIngredientsText);
+            recipeViewHolder.ingredients.setVisibility(View.VISIBLE);
+        } else {
+            recipeViewHolder.ingredients.setText(null);
+            recipeViewHolder.ingredients.setVisibility(View.GONE);
+        }
+
+        if (recipe.missingIngredients != null) {
+            if (!recipe.missingIngredients.isEmpty()) {
+                String fullMissingIngredientsText = "Missing Ingredients: \n";
+                for (int i = 0; i < recipe.missingIngredients.size(); i++) {
+                    String missingIngredientString = recipe.missingIngredients.get(i);
+                    missingIngredientString = "- " + missingIngredientString + "\n";
+                    fullMissingIngredientsText += missingIngredientString;
+                }
+                recipeViewHolder.missingIngredients.setText(fullMissingIngredientsText);
+                recipeViewHolder.missingIngredients.setVisibility(View.VISIBLE);
+            } else {
+                recipeViewHolder.missingIngredients.setText(null);
+                recipeViewHolder.missingIngredients.setVisibility(View.GONE);
+            }
+        } else {
+            recipeViewHolder.missingIngredients.setText(null);
+            recipeViewHolder.missingIngredients.setVisibility(View.GONE);
+        }
+
+        if (!recipe.steps.isEmpty()) {
+            String fullStepsText = "";
+            for (int i = 0; i < recipe.steps.size(); i++) {
+                String stepString = recipe.steps.get(i);
+                int stepNumber = i + 1;
+                stepString =  stepNumber + ". " + stepString + "\n\n";
+                fullStepsText += stepString;
+                recipeViewHolder.steps.setText(fullStepsText);
+            }
+            recipeViewHolder.steps.setVisibility(View.VISIBLE);
+        } else {
+            recipeViewHolder.steps.setText(null);
+            recipeViewHolder.steps.setVisibility(View.GONE);
+        }
+
         recipeViewHolder.parentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,6 +172,10 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         RelativeLayout parentView;
         @BindView(R.id.child_view)
         RelativeLayout childView;
+        @BindView(R.id.recipe_ingredients)
+        TextView ingredients;
+        @BindView(R.id.recipe_missing_ingredients)
+        TextView missingIngredients;
         @BindView(R.id.recipe_steps)
         TextView steps;
         @BindView(R.id.recipe_rating)

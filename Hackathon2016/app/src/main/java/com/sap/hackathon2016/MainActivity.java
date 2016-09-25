@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
     public void onSearchIconClicked() {
         if (!mIngredients.isEmpty()) {
             String ingredients = TextUtils.join(",", mIngredients);
-            ApiManager.getInstance().getRecipesService().getRecipes(ingredients)
+            ApiManager.getInstance().getRecipesService().getRecipes(ingredients, mThreshold)
                     .enqueue(new Callback<List<Recipe>>() {
                         @Override
                         public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         } else {
             mThreshold++;
         }
-        mThresholdText.setText(getString(R.string.threshold_missing_ingredients, mThreshold++));
+        mThresholdText.setText(getString(R.string.threshold_missing_ingredients, mThreshold));
     }
 
     @OnClick(R.id.down_arrow)
@@ -197,6 +197,24 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         mFiltersContainer.setVisibility(View.GONE);
         mThreshold = 0;
         mThresholdText.setText(getString(R.string.threshold_missing_ingredients, mThreshold));
+
+        ApiManager.getInstance().getRecipesService()
+                .getRecipes()
+                .enqueue(new Callback<List<Recipe>>() {
+                    @Override
+                    public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                        if (response.body() == null) {
+                            return;
+                        }
+
+                        mRecipesListAdapter.clearAndAddRecipes(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Recipe>> call, Throwable t) {
+                        Log.e(TAG, t.getMessage());
+                    }
+                });
     }
 
     @Override
