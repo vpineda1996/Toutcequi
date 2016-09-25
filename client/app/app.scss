@@ -10,11 +10,20 @@ $fa-font-path: '/assets/fonts/font-awesome/';
  * App-wide Styles
  */
 
+$genericBiegeColor: #FAFAFA;
+$genericLightGrey: #999D9F;
+$genericLightBlue: #4393B9;
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
+}
+
+* {
+  // font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
 }
 
 // Component styles are injected through gulp
@@ -26,3 +35,93 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 @import '../components/modal/modal';
 @import '../components/oauth-buttons/oauth-buttons';
 /* endinject */
+
+/**********************************
+
+              Nav Bar
+
+**********************************/
+
+.nav.navbar-nav.navbar-right {
+    width: auto;
+}
+
+.nav.navbar-nav {
+    width: 500px;
+}
+
+.navbar-input {
+    width: 60%;
+    padding-top: 7px;
+    padding-left: 10px;
+}
+
+.navbar.navbar-default.navbar-static-top {
+    margin-bottom: 0;
+}
+
+.navbar-ingredients-containter {
+  width: 100%;
+  height: 200px;
+  background-color: $genericBiegeColor;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  
+  .ingredients-wrapper {
+    width: 65%;
+    margin-left: 5%;
+
+    .ingredient-tag {
+        width: 15%;
+        text-overflow: ellipsis;
+        background-color: $genericLightBlue;
+        display: inline-block;
+        margin-left: 10px;
+        text-align: center;
+        height: 30px;
+        padding-top: 5px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 200;
+        padding-left: 5px;
+        margin-top: 10px;
+
+        span {
+          position: relative;
+          float: right;
+          padding-top: 2px;
+          margin-right: 5px;
+        }
+    }
+
+    .ingredient-tag:first-child {
+      margin-left: 0;
+    }
+  } 
+
+  .ingredients-filter {
+    width: 28%;
+    .ingredient-filter-select {
+      width: 25%;
+      background-color: transparent;
+    }
+    .ingredient-filter-select:active, 
+    .ingredient-filter-select:focus {
+      outline: none;
+    }
+  }
+
+  .search-recipe-btn {
+    margin-top: 80px;
+    position: relative;
+    float: right;
+  }
+
+}
+
+.navbar-override-color {
+  background-color: #fff !important;
+}
+
