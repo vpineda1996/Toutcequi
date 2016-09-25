@@ -25,6 +25,7 @@ import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import recipielist from './recipelist/recipelist.component';
+import addRecipe from './add/add.component';
 
 
 import './app.scss';
@@ -43,7 +44,7 @@ angular.module('hackathonApp', [
   account,
   admin,  navbar,
   footer,
-  recipielist,
+  recipielist, addRecipe,
   main,
   constants,
   socket,

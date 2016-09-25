@@ -1,6 +1,6 @@
 <div class="recipe-flex-container">
     <div class="recipe-flex">
-        <div class="cardContainer" ng-repeat="recipe in $ctrl.recipes">
+        <div class="cardContainer" ng-repeat="recipe in $ctrl.recipes" ng-class="{oneElem: $ctrl.recipes.length === 1, twoElem: $ctrl.recipes.length === 2}">
             <div class="author-title-container" ng-click="$ctrl.onClick(recipe)">
                 <div class="item-image-back" style="background-image:url('{{recipe.imageBackground}}')"></div>
                 <div class="title-recipe-item">
@@ -11,15 +11,6 @@
                         <img src="assets/images/star.svg" width="20px" height="20px" ng-repeat="n in range(recipe)">
                     </div>
                 </div>
-            </div>
-
-            <div class="bottom-recipe-item">
-                <!--<div class="description-recipe-item-container">
-                    <div class="description-recipe-item">
-                        {{recipe.description}}
-                    </div>
-                </div>-->
-
             </div>
         </div>
     </div>
