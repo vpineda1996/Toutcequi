@@ -71,13 +71,12 @@ export class NavbarComponent {
 
   getRecipes() {
     this.showSearchEmptyError = false;
-    
     var oParams = {
       ingredients: this.ingredientTags.join(),
       threshold: parseInt(this.$scope.formOptions.threshold, 10) || 0
     };
     this.$http({
-      url: 'http://10.10.32.153:3000/api/recipes/getRecipes',
+      url: '/api/recipes/getRecipes',
       method: 'GET',
       params: oParams
     }).then(response => {

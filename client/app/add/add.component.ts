@@ -27,6 +27,8 @@ export class AddComponent {
   steps = [];
   recipeName: string;
   ingredients: Ingredient[] = [];
+  imageLink = 'http://www.seriouseats.com/images/2015/04/20150429-tamales-red-chili-joshua-bousel.jpg';
+  
   /*@ngInject*/
   constructor($location, $scope, $http) {
     this.$location = $location;
@@ -67,7 +69,7 @@ export class AddComponent {
       let completeIngredients = this.ingredients.map((ingredient: Ingredient) => 
         ingredient.number + ' ' + ingredient.unit + ' ' + ingredient.name);
 
-      let joinSteps = this.steps.map((step: Step) => step.number + ' ' + step.text);
+      let joinSteps = this.steps.map((step: Step) => step.text);
       let oParams: RecipeElement = {
         name: this.recipeName,
         rating: 5,
@@ -75,14 +77,15 @@ export class AddComponent {
         ingredients: simpleIngredients,
         quantity: completeIngredients,
         servingSize: 5,
-        steps: joinSteps
-      }
+        steps: joinSteps,
+        imageBackground: this.imageLink,
+      };
       this.$http({
         method: 'POST',
         url: '/api/recipes/',
         data: oParams
       }).then((res) => {
-        console.log(res);
+        this.$location.path('/recipelist');
       });
     }
   }
