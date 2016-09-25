@@ -179,6 +179,7 @@ export function getRecipes(req, res){
       aResultSet.forEach(function(oDataValue){
         var aDiff = oDataValue.ingredients.filter(ingredient =>
           aIngredients.indexOf(ingredient) < 0);
+          oDataValue.missingIngredients = aDiff;
         if (aDiff.length <= iThreshold) {
           aFilteredIngredients.push(oDataValue);
         }
