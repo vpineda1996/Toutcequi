@@ -9,7 +9,7 @@ interface IngredientObject {
 };
 
 interface FormOptions {
-  threshold: string
+  threshold: string;
 };
 
 export class NavbarComponent {
@@ -18,7 +18,7 @@ export class NavbarComponent {
     'link': '/'
   }];
   ingredient: IngredientObject;
-  formOptions: FormOptions
+  formOptions: FormOptions;
   $location;
   $scope;
   $rootScope;
