@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int LOGIN_REQUEST = 101;
+    private static final int CREATE_REQUEST = 102;
 
     @BindView(R.id.food_image)
     ImageView mFoodImage;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
 
     private RecipesListAdapter mRecipesListAdapter;
 
-    private int mThreshold = 0;
+    private int mThreshold = 5;
     private List<String> mIngredients = new ArrayList<>();
 
     @Override
@@ -104,23 +105,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
             }
         });
 
-        RecipesService recipesService = ApiManager.getInstance().getRecipesService();
-        recipesService.getRecipes().enqueue(new Callback<List<Recipe>>() {
-            @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-
-                if (response.body() == null) {
-                    return;
-                }
-
-                mRecipesListAdapter.addRecipes(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
+        getRecipes();
     }
 
     @OnClick(R.id.search_icon)
@@ -186,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
     @OnClick(R.id.user_icon)
     public void onUserIconClicked() {
         if (SessionManager.getInstance(getApplicationContext()).isLoggedIn()) {
-            startActivity(new Intent(this, CreateRecipeActivity.class));
+            startActivityForResult(new Intent(this, CreateRecipeActivity.class), CREATE_REQUEST);
         } else {
             startActivityForResult(new Intent(this, LoginActivity.class), LOGIN_REQUEST);
         }
@@ -198,6 +183,10 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         mThreshold = 0;
         mThresholdText.setText(getString(R.string.threshold_missing_ingredients, mThreshold));
 
+        getRecipes();
+    }
+
+    private void getRecipes() {
         ApiManager.getInstance().getRecipesService()
                 .getRecipes()
                 .enqueue(new Callback<List<Recipe>>() {
@@ -237,6 +226,10 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == LOGIN_REQUEST && resultCode == RESULT_OK) {
             mUserIcon.setImageResource(R.drawable.ic_action_content_add_circle);
+        }
+
+        if (requestCode == CREATE_REQUEST && resultCode == RESULT_OK) {
+            getRecipes();
         }
     }
 }

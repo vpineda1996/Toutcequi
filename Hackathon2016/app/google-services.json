@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "270438332583",
+    "firebase_url": "https://toutcequi-217f2.firebaseio.com",
+    "project_id": "toutcequi-217f2",
+    "storage_bucket": "toutcequi-217f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270438332583:android:a2f1f6cf5febc61a",
+        "android_client_info": {
+          "package_name": "com.sap.hackathon2016"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270438332583-k5igsb729ep2f865roua0eshu1ek7p9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjgHbC-8_roMeBkSZTL77legqDo9N3DEU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
