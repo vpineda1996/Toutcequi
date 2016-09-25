@@ -66,21 +66,65 @@ User.sync()
 
 var data = [
     {
-      'name': 'Burrito',
-      'description': 'Awesome Mexican food',
+      'name': 'Roasted Vegi Lasagna',
+      'description': 'Roasted Vegi Lasagna',
       'rating': 5,
-      'imageThumbnail': 'http://esq.h-cdn.co/assets/cm/15/06/54d460caaf74c_-_sofritas_burrito_fixed_at.png',
-      'ingredients': ['lime','tomato','avocado'],
+      'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
+      'imageBackground': 'https://enrootmeals.com/images/gallery/sVegLasagna-2-(1)-1473796886.jpg',
+      'ingredients': [],
+      'servingSize': 4,
       'steps': []
     },
     {
-      'name':'Taco',
-      'description': 'Awesome Mexican food',
+      'name':'BBQ Brisket Plate',
+      'description': 'BBQ Brisket Plate',
       'rating': 5,
-      'imageThumbnail': 'www.google.com',
+      'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
+      'imageBackground': 'https://enrootmeals.com/images/gallery/sBrisketPlate-1473818006.jpg',
       'ingredients': [],
       'steps': []
+    },
+    {
+      'name': 'Grilled Lemon-Garlic Chicken and Tomato Kebabs With Basil Chimichurri Recipe',
+      'description': 'Grilled Lemon-Garlic Chicken and Tomato Kebabs With Basil Chimichurri Recipe',
+      'rating': 5,
+      'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
+      'imageBackground': 'http://www.seriouseats.com/recipes/assets_c/2016/08/20160703-Grilled-Lemon-Garlic-Chicken-Tomato-Kebabs-Basil-Chimichurri-emily-matt-clifton-7-thumb-1500xauto-433447.jpg',
+      'servingSize': 4,
+      'ingredients': [],
+      'steps': [],
+    },
+    {
+      'name': 'Butter-Basted Sous Vide Halibut Recipe',
+      'description': 'Butter-Basted Sous Vide Halibut Recipe',
+      'rating': 5,
+      'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
+      'imageBackground': 'http://www.seriouseats.com/recipes/assets_c/2016/08/20160826-sous-vide-halibut-26-thumb-1500xauto-433935.jpg',
+      'servingSize': 4,
+      'ingredients': [],
+      'steps': [],
+    },
+    {
+      'name': 'The Best Minestrone Soup Recipe',
+      'description': 'The Best Minestrone Soup Recipe',
+      'rating': 5,
+      'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
+      'imageBackground': 'http://www.seriouseats.com/recipes/assets_c/2016/09/20160909-minestrone-18-thumb-1500xauto-434133.jpg',
+      'servingSize': 4,
+      'ingredients': [],
+      'steps': [],
+    },
+    {
+      'name': 'Quick-Marinated White Bean Salad and Feta Lettuce Cups Recipe',
+      'description': 'Quick-Marinated White Bean Salad and Feta Lettuce Cups Recipe',
+      'rating': 5,
+      'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
+      'imageBackground': 'http://www.seriouseats.com/recipes/assets_c/2016/08/20160703-Quick-Marinated-White-Bean-Salad-Feta-Lettuce-Cups-Emily-Matt-Clifton-3-thumb-1500xauto-433449.jpg',
+      'servingSize': 4,
+      'ingredients': [],
+      'steps': [],
     }
+
 ];
 Recipes.sync({force:true})
   .then(() => Recipes.destroy({ where: {} }))

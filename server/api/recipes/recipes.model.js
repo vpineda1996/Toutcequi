@@ -15,6 +15,7 @@ export default function(sequelize, DataTypes) {
     servingSize: DataTypes.INTEGER,
     ingredients: DataTypes.ARRAY(DataTypes.STRING),
     steps: DataTypes.ARRAY(DataTypes.STRING),
+    imageBackground: DataTypes.STRING,
     info: DataTypes.STRING,
     active: DataTypes.BOOLEAN
   });
