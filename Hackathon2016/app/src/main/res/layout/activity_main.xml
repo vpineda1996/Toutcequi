@@ -37,6 +37,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
+        android:imeOptions="actionDone"
         android:layout_marginLeft="15dp"
         android:singleLine="true"
         android:maxLines="1"

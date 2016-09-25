@@ -1,12 +1,16 @@
 package com.sap.hackathon2016;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -70,10 +74,33 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
 
         mThresholdText.setText(getString(R.string.threshold_missing_ingredients, mThreshold));
 
+        mSearchInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    onAddIconClicked();
+                }
+                return false;
+            }
+        });
+        mSearchInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mIngredientsGroup.getLabels().isEmpty()) {
+                    mTagsContainer.setVisibility(View.VISIBLE);
+                    mFiltersContainer.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         RecipesService recipesService = ApiManager.getInstance().getRecipesService();
         recipesService.getRecipes().enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+
+                if (response.body() == null) {
+                    return;
+                }
+
                 mRecipesListAdapter.addRecipes(response.body());
             }
 
@@ -92,21 +119,31 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
                     .enqueue(new Callback<List<Recipe>>() {
                         @Override
                         public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+
+                            if (response.body() == null) {
+                                return;
+                            }
+
                             mRecipesListAdapter.clearAndAddRecipes(response.body());
                         }
 
                         @Override
                         public void onFailure(Call<List<Recipe>> call, Throwable t) {
-
+                            Log.e(TAG, t.getMessage());
                         }
                     });
+
+            mTagsContainer.setVisibility(View.GONE);
+            mFiltersContainer.setVisibility(View.GONE);
         }
+
+        hideKeyboard();
     }
 
     @OnClick(R.id.add_icon)
     public void onAddIconClicked() {
-        String inputText = mSearchInput.getText().toString();
-        if (!TextUtils.isEmpty(inputText)) {
+        String inputText = mSearchInput.getText().toString().trim();
+        if (!TextUtils.isEmpty(inputText) && !mIngredients.contains(inputText)) {
             mIngredientsGroup.addLabel(inputText);
             mIngredients.add(inputText);
             mSearchInput.setText("");
@@ -145,5 +182,14 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
     public void onRemoveLabel(View view, int position) {
         Label label = (Label) view;
         mIngredients.remove(label.getText());
+    }
+
+    private void hideKeyboard() {
+        // Check if no view has focus:
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
