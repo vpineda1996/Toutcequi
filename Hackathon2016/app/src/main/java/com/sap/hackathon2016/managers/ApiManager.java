@@ -40,7 +40,7 @@ public class ApiManager {
     private Retrofit buildRetrofitAdapter() {
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl("http://10.10.32.153:3000/");
+                .baseUrl("https://still-fortress-17756.herokuapp.com/api/recipes/");
 
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
         if (BuildConfig.DEBUG) {
