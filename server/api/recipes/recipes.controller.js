@@ -131,3 +131,29 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+// model.find({
+//   where: {
+//     myJsonCol: {
+//       '$contains': { browsers:[{name: "chrome"}] }
+//     }
+//   }
+// })
+
+// Gets all recipes given a list of ingredients in a json object
+export function getRecipes(req, res){
+  var sIngredients = req.query.ingredients;
+  var aIngredients = sIngredients.split(','); // array of ingredients
+  var iThreshold = req.query.threshold; // maximum # of missing ingredients
+  var sSortOn = req.query.sorton; // one of rating, highest missing ingredient, lowest
+  var sFilter = req.query.filter; // One of category, time to cook, or difficulty
+  return Recipes.findAll({
+    where: {
+      'ingredients': {
+        overlap: aIngredients
+      }
+    }
+  })
+  .then(respondWithResult(res))
+  .catch(handleError(res));
+}

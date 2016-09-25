@@ -13,6 +13,7 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', controller.index);
+router.get('/getrecipes', controller.getRecipes);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);

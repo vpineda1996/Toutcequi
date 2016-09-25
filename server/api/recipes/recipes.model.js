@@ -13,7 +13,7 @@ export default function(sequelize, DataTypes) {
     rating: DataTypes.INTEGER,
     imageThumbnail: DataTypes.STRING,
     servingSize: DataTypes.INTEGER,
-    ingredients: DataTypes.ARRAY(DataTypes.JSON),
+    ingredients: DataTypes.ARRAY(DataTypes.STRING),
     steps: DataTypes.ARRAY(DataTypes.STRING),
     info: DataTypes.STRING,
     active: DataTypes.BOOLEAN

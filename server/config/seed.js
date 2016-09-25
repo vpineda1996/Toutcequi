@@ -70,7 +70,7 @@ var data = [
       'description': 'Awesome Mexican food',
       'rating': 5,
       'imageThumbnail': 'http://esq.h-cdn.co/assets/cm/15/06/54d460caaf74c_-_sofritas_burrito_fixed_at.png',
-      'ingredients': [],
+      'ingredients': ['lime','tomato','avocado'],
       'steps': []
     },
     {
