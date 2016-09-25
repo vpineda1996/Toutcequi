@@ -145,7 +145,6 @@ export function getRecipes(req, res){
   var sIngredients = req.query.ingredients;
   var aIngredients = sIngredients.split(','); // array of ingredients
   var a1 = aIngredients.map( ingredient => ingredient.toLowerCase());
-  console.log(a1);
   var iThreshold = req.query.threshold; // maximum # of missing ingredients
   var sSortOn = req.query.sorton; // one of rating, highest missing ingredient, lowest
   var sFilter = req.query.filter; // One of category, time to cook, or difficulty
@@ -154,8 +153,42 @@ export function getRecipes(req, res){
       'ingredients': {
         overlap: a1
       }
+      // raw: true
+      // [this.sequelize.fn('array_length', this.sequelize.col('ingredients'), 1)] : 1
     }
   })
+  .then(filterThreshold(res))
   .then(respondWithResult(res))
   .catch(handleError(res));
+
+  function filterThreshold(res){
+
+    return function (aResultSet){
+      // var aRecipeIngredients = oResultSet.rows;
+      // var aFilteredIngredients = [];
+      // aRecipeIngredients.forEach(function(oRecipe){
+      //   var aDiff = aIngredients.filter(ingredient =>
+      //     oRecipe.ingredients.indexOf(ingredient) < 0);
+      //   if(aDiff.length <= iThreshold) {
+      //     aFilteredIngredients.push.apply(oRecipe);
+      //   }
+      // })
+      //
+      // oResultSet.count = aFilteredIngredients.length;
+      // oResultSet.rows = aFilteredIngredients;
+      console.log(oResultSet); // Array of Data Values
+      var aFilteredIngredients = [];
+      aResultSet.forEach(function(oDataValue){
+        var aDiff = oDataValue.ingredients.filter(ingredient =>
+          aIngredients.indexOf(ingredient) < 0);
+
+        if(aDiff.length <= iThreshold) {
+          aFilteredIngredients.push.apply(oDataValue);
+        }
+      })
+      return aFilteredIngredients;
+
+    };
+
+  }
 }
