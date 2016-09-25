@@ -85,6 +85,7 @@ export class AddComponent {
         url: '/api/recipes/',
         data: oParams
       }).then((res) => {
+        console.log(res);
         this.$location.path('/recipelist');
       });
     }

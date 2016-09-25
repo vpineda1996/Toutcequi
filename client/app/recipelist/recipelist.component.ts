@@ -43,7 +43,7 @@ export class RecipelistComponent {
     this.isExpandedRecipeNotVisible = true;
     if (!this.$rootScope.recipes) {
       this.$http({
-        url: 'http://10.10.32.153:3000/api/recipes',
+        url: '/api/recipes',
         method: 'GET'
       }).then(response => {
         this.recipes = response.data;
