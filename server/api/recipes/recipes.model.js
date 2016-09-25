@@ -16,7 +16,7 @@ export default function(sequelize, DataTypes) {
     ingredients: DataTypes.ARRAY(DataTypes.STRING),
     quantity: DataTypes.ARRAY(DataTypes.STRING),
     missingIngredients: DataTypes.ARRAY(DataTypes.STRING),
-    steps: DataTypes.ARRAY(DataTypes.STRING),
+    steps: DataTypes.ARRAY(DataTypes.STRING(1024)),
     activeTime: DataTypes.STRING,
     totalTime: DataTypes.STRING,
     imageBackground: DataTypes.STRING,
