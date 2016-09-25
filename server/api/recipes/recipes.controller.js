@@ -144,13 +144,15 @@ export function destroy(req, res) {
 export function getRecipes(req, res){
   var sIngredients = req.query.ingredients;
   var aIngredients = sIngredients.split(','); // array of ingredients
+  var a1 = aIngredients.map( ingredient => ingredient.toLowerCase());
+  console.log(a1);
   var iThreshold = req.query.threshold; // maximum # of missing ingredients
   var sSortOn = req.query.sorton; // one of rating, highest missing ingredient, lowest
   var sFilter = req.query.filter; // One of category, time to cook, or difficulty
   return Recipes.findAll({
     where: {
       'ingredients': {
-        overlap: aIngredients
+        overlap: a1
       }
     }
   })
