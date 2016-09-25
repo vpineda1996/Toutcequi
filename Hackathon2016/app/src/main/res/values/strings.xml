@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Hackathon2016</string>
+    <string name="threshold_missing_ingredients">Missing ingredients threshold: %1$d</string>
+</resources>
