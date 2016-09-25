@@ -14,6 +14,8 @@ var db = {
 };
 
 // Insert models below
+db.Ingredient = db.sequelize.import('../api/ingredient/ingredient.model');
+db.Recipes = db.sequelize.import('../api/recipes/recipes.model');
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
 

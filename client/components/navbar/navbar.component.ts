@@ -31,8 +31,10 @@ export class NavbarComponent {
   getMatchingRecipes: Function;
   showSearchEmptyError = false;
   baseUrl: string;
+  $route;
+  hideIngredientPane = false;
 
-  constructor($rootScope, $location, $scope, $http, dmService, Auth) {
+  constructor($rootScope, $location, $scope, $http, $route, Auth) {
     'ngInject';
     'ngAnimate';
     this.$location = $location;
@@ -42,13 +44,19 @@ export class NavbarComponent {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.$http = $http;
+    this.$route = $route;
     this.baseUrl = 'http://172.25.97.63:3000';
     $(function () {
       $('[data-toggle="popover"]').popover()
-    })
+    });
   }
 
   isActive(route) {
+    if (this.$location.path() === '/login' || this.$location.path() === '/signup') {
+        this.hideIngredientPane = true;
+    } else {
+      this.hideIngredientPane = false;
+    }
     return route === this.$location.path();
   }
 
@@ -64,19 +72,22 @@ export class NavbarComponent {
   }
 
   getRecipes() {
-    if (this.ingredientTags.length === 0) {
-      this.showSearchEmptyError = true;
+    if (this.ingredientTags.length === 0 && false) { //do we want this to be blocking?
+      this.showSearchEmptyError = false;//true; do we want this?
     } else {
       this.showSearchEmptyError = false;
       var oParams = {
         ingredients: this.ingredientTags,
         threshold: parseInt(this.$scope.showSearchEmptyError, 10) || 0
       }
-      // this.$http.get(this.baseUrl + '/api/recipes').then(response => {
-      //   console.log(response);
-      // });
-      this.$rootScope.recipeResults = [{recipe: 'a good one!!!'}];
-      this.$location.path('/recipelist');
+      this.$http.get('http://172.25.96.206:3000/api/recipes?ingredients=' + this.ingredientTags.join(",")).then(response => {
+        this.$rootScope.recipes = response.data;
+        if (this.$location.path() !== '/recipelist') {
+          this.$location.path('/recipelist');
+        } else {
+          this.$route.reload();
+        }
+      });
     }
   }
 }

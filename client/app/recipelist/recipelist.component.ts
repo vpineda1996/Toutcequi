@@ -27,18 +27,35 @@ export class RecipelistComponent {
   $scope;
   $http;
   test: string;
+  $rootScope;
+  expandedRecipe: RecipeElement;
+  isExpandedRecipeNotVisible: boolean;
 
-  constructor($http, $location, $scope) {
+  constructor($http, $location, $scope, $rootScope) {
     'ngInject';
     this.$http = $http;
     this.$scope = $scope;
+    this.$rootScope = $rootScope;
+    this.$location = $location;
+    this.expandedRecipe = null;
+    this.isExpandedRecipeNotVisible = true;
+    if (!this.$rootScope.recipes) {
+      this.$location.path("/");
+    }
   }
 
-  $onInit (){
-    this.$http.get('http://172.25.96.206:3000/api/recipes').then(response => {
-      this.recipes = response.data;
-    });
+  $onInit () {
+    // this.$http.get('http://172.25.96.206:3000/api/recipes').then(response => {
+    //   this.recipes = response.data;
+    // });
+    this.recipes = this.$rootScope.recipes;
     this.$scope.range = createArray;
+  }
+  
+  public onClick(recipe: RecipeElement) {
+    // TODO, call
+    this.expandedRecipe = recipe;
+    $("#exended-recipe").addClass('show');
   }
 }
 

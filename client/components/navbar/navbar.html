@@ -14,14 +14,6 @@
         <li ng-repeat="item in $ctrl.menu" ng-class="{active: $ctrl.isActive(item.link)}">
           <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
-        <li ng-class="{active: $ctrl.isActive(item.link)}" class="navbar-input">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Add ingredient..." ng-model="ingredient.newIngredient">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="$ctrl.addNewIngredient()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-            </span>
-          </div>
-        </li>
         <li ng-show="$ctrl.isAdmin()" ng-class="{active: $ctrl.isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 
@@ -38,7 +30,14 @@
   </div>
 </div>
 
-<div class="navbar-ingredients-containter">
+<div class="input-group new-ingredient-input" ng-show="!$ctrl.hideIngredientPane">
+  <input type="text" class="form-control" placeholder="Add ingredient..." ng-model="ingredient.newIngredient" ng-keyup="$event.keyCode == 13 && $ctrl.addNewIngredient()">
+  <span class="input-group-btn">
+    <button class="btn btn-default" type="button" ng-click="$ctrl.addNewIngredient()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+  </span>
+</div>
+<div class="navbar-ingredients-containter" ng-show="!$ctrl.hideIngredientPane">
+
   <div class="ingredients-wrapper">
     <h4>Ingredients</h4>
     <div class="ingredient-tag" ng-repeat="ingredient in $ctrl.ingredientTags">
@@ -54,8 +53,9 @@
     <h4>Filters</h4>
     <div class="ingredient-filter-wrapper">
       <form>
-        Threshold <span class = "glyphicon glyphicon-question-sign" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="This is the number of ingredient that you are okay being short of."></span>:
-        <select class = "ingredient-filter-select" ng-model="formOptions.threshold">
+        Threshold <span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-container="body" data-toggle="popover"
+          data-placement="bottom" data-content="This is the number of ingredient that you are okay being short of."></span>:
+        <select class="ingredient-filter-select" ng-model="formOptions.threshold">
           <option value="0">0
           <option value="1">1
           <option value="2">2
@@ -65,8 +65,8 @@
         </select>
         <br />
       </form>
-      <span ng-show = "$ctrl.showSearchEmptyError">Try adding some ingredients first</span>
-      <button class = "btn btn-default search-recipe-btn" type="submit" ng-click="$ctrl.getRecipes()">Search for recipes</button>
+      <span ng-show="$ctrl.showSearchEmptyError">Try adding some ingredients first</span>
+      <button class="btn btn-default search-recipe-btn" type="submit" ng-click="$ctrl.getRecipes()">Search for recipes</button>
     </div>
   </div>
 </div>

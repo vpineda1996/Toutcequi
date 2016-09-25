@@ -60,6 +60,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-top: 50px;
+  padding-bottom: 50px;
   background-color: #FAFAFA;
 
   .homepage-section-one, 
@@ -80,6 +81,8 @@
       }
       p {
         padding-top: 10px;
+        font-weight: 200;
+        line-height: 1.6em;
       }
     }
 
