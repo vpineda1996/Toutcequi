@@ -1,6 +1,7 @@
 package com.sap.hackathon2016;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.dpizarro.autolabel.library.AutoLabelUI;
 import com.dpizarro.autolabel.library.Label;
 import com.sap.hackathon2016.managers.ApiManager;
+import com.sap.hackathon2016.managers.SessionManager;
 import com.sap.hackathon2016.models.Recipe;
 import com.sap.hackathon2016.network.RecipesService;
 import com.sap.hackathon2016.views.adapter.RecipesListAdapter;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private static final int LOGIN_REQUEST = 101;
+
     @BindView(R.id.food_image)
     ImageView mFoodImage;
     @BindView(R.id.search_text)
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
     RelativeLayout mFiltersContainer;
     @BindView(R.id.threshold)
     TextView mThresholdText;
+    @BindView(R.id.user_icon)
+    ImageView mUserIcon;
 
     private RecipesListAdapter mRecipesListAdapter;
 
@@ -63,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        if (SessionManager.getInstance(getApplicationContext()).isLoggedIn()) {
+            mUserIcon.setImageResource(R.drawable.ic_action_content_add_circle);
+        } else {
+            mUserIcon.setImageResource(R.drawable.ic_action_action_account_circle);
+        }
 
         Picasso.with(this).load("http://lorempixel.com/400/600/food/").fit().centerCrop().into(mFoodImage);
         mIngredientsGroup.setOnLabelsEmptyListener(this);
@@ -171,6 +183,15 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         mThresholdText.setText(getString(R.string.threshold_missing_ingredients, mThreshold));
     }
 
+    @OnClick(R.id.user_icon)
+    public void onUserIconClicked() {
+        if (SessionManager.getInstance(getApplicationContext()).isLoggedIn()) {
+            startActivity(new Intent(this, CreateRecipeActivity.class));
+        } else {
+            startActivityForResult(new Intent(this, LoginActivity.class), LOGIN_REQUEST);
+        }
+    }
+
     @Override
     public void onLabelsEmpty() {
         mFiltersContainer.setVisibility(View.GONE);
@@ -190,6 +211,14 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         if (view != null) {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOGIN_REQUEST && resultCode == RESULT_OK) {
+            mUserIcon.setImageResource(R.drawable.ic_action_content_add_circle);
         }
     }
 }
