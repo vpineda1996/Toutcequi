@@ -199,7 +199,7 @@ var data = [
       'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
       'imageBackground': 'http://www.seriouseats.com/recipes/assets_c/2013/10/20131025-271134-pimento-cheese-twice-baked-potatoes-thumb-625xauto-361263.jpg',
       'servingSize': 4,
-      'ingredients': ['bell pepper','potato','cheese','sour cream', 'butter', 'Kosher salt'],
+      'ingredients': ['bell pepper','potato','cheese','sour cream', 'butter', 'kosher salt'],
       'quantity': [
         '1 medium red bell pepper',
         '4 russet potatoes, scrubbed',
