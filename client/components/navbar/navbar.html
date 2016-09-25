@@ -31,7 +31,7 @@
 </div>
 
 <div class="input-group new-ingredient-input" ng-show="!$ctrl.hideIngredientPane">
-  <input type="text" class="form-control" placeholder="Add ingredient..." ng-model="ingredient.newIngredient" ng-keyup="$event.keyCode == 13 && $ctrl.addNewIngredient()">
+  <input type="text" class="form-control" placeholder="Add ingredient (i.e. eggs)" ng-model="ingredient.newIngredient" ng-keyup="$event.keyCode == 13 && $ctrl.addNewIngredient()">
   <span class="input-group-btn">
     <button class="btn btn-default" type="button" ng-click="$ctrl.addNewIngredient()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
   </span>
