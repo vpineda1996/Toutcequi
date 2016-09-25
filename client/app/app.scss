@@ -33,6 +33,7 @@ body {
 
 // Component styles are injected through gulp
 /* inject:scss */
+@import 'add/add';
 @import 'admin/admin';
 @import 'main/main';
 @import 'recipelist/recipelist';

@@ -1,6 +1,6 @@
 <div class="recipe-flex-container">
     <div class="recipe-flex">
-        <div class="cardContainer" ng-repeat="recipe in $ctrl.recipes">
+        <div class="cardContainer" ng-repeat="recipe in $ctrl.recipes" ng-class="{oneElem: $ctrl.recipes.length === 1, twoElem: $ctrl.recipes.length === 2}">
             <div class="author-title-container" ng-click="$ctrl.onClick(recipe)">
                 <div class="item-image-back" style="background-image:url('{{recipe.imageBackground}}')"></div>
                 <div class="title-recipe-item">
@@ -12,19 +12,54 @@
                     </div>
                 </div>
             </div>
-
-            <div class="bottom-recipe-item">
-                <!--<div class="description-recipe-item-container">
-                    <div class="description-recipe-item">
-                        {{recipe.description}}
-                    </div>
-                </div>-->
-
-            </div>
         </div>
     </div>
 </div>
 
 <div class="extended-recipe" id='exended-recipe'>
-    {{$ctrl.expandedRecipe}}
+    <div class = "close-extended" ng-click="$ctrl.closeExtenedPopup()"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <h4>{{$ctrl.expandedRecipe.name}}</h4>
+    <div class = "extend-top-half">
+        <div class = "extended-image">
+            <img src = "{{$ctrl.expandedRecipe.imageBackground}}" />
+        </div>
+        <div class = "extended-top-half-details-wrapper">
+            <img src = "{{$ctrl.expandedRecipe.imageThumbnail}}" />
+            <div class = "extended-top-half-details">
+                <ul>
+                    <li class = "extended-recipe-description"><span class ="label">Description:</span> {{$ctrl.expandedRecipe.description}}</li>
+                    <li><span class ="label">Rating:</span> {{$ctrl.expandedRecipe.rating}}/5</li>
+                    <li><span class ="label">Serving Size:</span> 
+                        <span ng-show="!!$ctrl.expandedRecipe.servingSize">{{$ctrl.expandedRecipe.servingSize }}</span>
+                        <span ng-show="!$ctrl.expandedRecipe.servingSize">No information</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class = "extend-bottom-half">
+        <div class = "bottom-half-left">
+            <h4>Ingredients:</h4>
+            <ul>
+                <li ng-repeat="ingredients in $ctrl.expandedRecipe.ingredients">
+                    {{ingredients}}
+                </li>
+            </ul>
+
+            <h4>Missing Ingredients<br /><small>Click to add to shopping list</small></h4>
+            <ul>
+                <li ng-repeat="ingredients in $ctrl.expandedRecipe.ingredients">
+                    {{ingredients}} <i class="fa fa-plus" aria-hidden="true" ng-click="$ctrl.addToShoppingList($index)"></i>
+                </li>
+            </ul>
+        </div>
+        <div class = "bottom-half-right">
+            <h4>Directions:</h4>
+            <ol>
+                <li ng-repeat="steps in $ctrl.expandedRecipe.steps">
+                    {{steps}}
+                </li>
+            </ol>
+        </div>
+    </div>
 </div>
