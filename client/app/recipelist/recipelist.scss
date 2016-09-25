@@ -1,0 +1,95 @@
+.recipe-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+
+    & > div {
+        width: 49%;
+        height: 300px;
+        align-content: center;
+        border-radius: 4px 4px 0 0;
+        // padding: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-bottom: 1px #DDD solid;
+        background-color: #ffffff;
+
+        .title-recipe-item {
+            height: 30%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            flex-grow: 8;
+            
+            & > div {
+                width: 100%;
+                padding-left: 30px;
+            }
+
+
+            .name-recipe-item {
+                font-size: 25px;
+                margin-top: 21px;
+                
+            }
+
+            .rating-recipe-item {
+                display: inline;
+            }
+        }
+
+        .bottom-recipe-item {
+            height: 70%;
+            display: flex;
+            flex-direction: row;
+            margin-top:3px;
+            justify-content: space-between;
+            padding: 15px;
+            
+            .image-recipe-item {
+                border-radius: 50%;
+                width: 40%;
+                overflow: hidden;
+                height: auto;
+            }
+
+            .description-recipe-item-container {
+                 height: 100%;
+                 width: 45%;
+                 display: flex;
+                 align-items: center;
+
+                 .description-recipe-item {
+                     color: #AAA;
+                }
+            } 
+        }
+
+        .author-title-container {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+    & > div:hover {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.28);
+    }
+
+    @media only screen and (max-width: 700px){
+        & > div {
+            width: 100%;
+        }
+    }
+}
+
+.recipe-flex-container {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #EEEEEE;
+}
