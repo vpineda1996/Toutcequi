@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top">
+<div class="navbar navbar-default navbar-static-top navbar-override-color">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
@@ -7,12 +7,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">hackathon</a>
+      <a href="/" class="navbar-brand">Toutcequi</a>
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
         <li ng-repeat="item in $ctrl.menu" ng-class="{active: $ctrl.isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
+          <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="$ctrl.isAdmin()" ng-class="{active: $ctrl.isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
@@ -20,10 +20,53 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/signup')}"><a href="/signup">Sign up</a></li>
         <li ng-hide="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
+        <li ng-show="$ctrl.isLoggedIn()">
+          <p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p>
+        </li>
         <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="$ctrl.isLoggedIn()"><a href="/logout">Logout</a></li>
       </ul>
+    </div>
+  </div>
+</div>
+
+<div class="input-group new-ingredient-input" ng-show="!$ctrl.hideIngredientPane">
+  <input type="text" class="form-control" placeholder="Add ingredient..." ng-model="ingredient.newIngredient" ng-keyup="$event.keyCode == 13 && $ctrl.addNewIngredient()">
+  <span class="input-group-btn">
+    <button class="btn btn-default" type="button" ng-click="$ctrl.addNewIngredient()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+  </span>
+</div>
+<div class="navbar-ingredients-containter" ng-show="!$ctrl.hideIngredientPane">
+
+  <div class="ingredients-wrapper">
+    <h4>Ingredients</h4>
+    <div class="ingredient-tag" ng-repeat="ingredient in $ctrl.ingredientTags">
+      {{ingredient}} <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="$ctrl.removeIngredient($index)"></span>
+    </div>
+    <div class="ingredient-empty-wrapper">
+      <h6 ng-show="$ctrl.ingredientTags.length === 0">
+        Looks like you have nothing added, try adding some ingredients to search...
+      </h6>
+    </div>
+  </div>
+  <div class="ingredients-filter">
+    <h4>Filters</h4>
+    <div class="ingredient-filter-wrapper">
+      <form>
+        Threshold <span class="glyphicon glyphicon-question-sign" aria-hidden="true" data-container="body" data-toggle="popover"
+          data-placement="bottom" data-content="This is the number of ingredient that you are okay being short of."></span>:
+        <select class="ingredient-filter-select" ng-model="formOptions.threshold">
+          <option value="0">0
+          <option value="1">1
+          <option value="2">2
+          <option value="3">3
+          <option value="4">4
+          <option value="5">5
+        </select>
+        <br />
+      </form>
+      <span ng-show="$ctrl.showSearchEmptyError">Try adding some ingredients first</span>
+      <button class="btn btn-default search-recipe-btn" type="submit" ng-click="$ctrl.getRecipes()">Search for recipes</button>
     </div>
   </div>
 </div>

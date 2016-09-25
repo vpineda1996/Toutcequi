@@ -10,6 +10,10 @@ $fa-font-path: '/assets/fonts/font-awesome/';
  * App-wide Styles
  */
 
+$genericBiegeColor: #FAFAFA;
+$genericLightGrey: #999D9F;
+$genericLightBlue: #4393B9;
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -17,11 +21,236 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding: 0.2em 0;
 }
 
+* {
+  // font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-weight: 100;
+}
+
+body {
+  background-color: #fafafa;
+}
+
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
 @import 'main/main';
+@import 'recipelist/recipelist';
 @import '../components/footer/footer';
 @import '../components/modal/modal';
 @import '../components/oauth-buttons/oauth-buttons';
 /* endinject */
+
+/**********************************
+
+              Nav Bar
+
+**********************************/
+
+.input-group.new-ingredient-input input{    
+    border-radius: 0;
+    margin-top: 10px;
+    border: none;
+    box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.1);
+}
+
+.input-group.new-ingredient-input input:focus {
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.input-group.new-ingredient-input .input-group-btn {
+    padding-top: 10px;
+}
+
+.input-group.new-ingredient-input .input-group-btn button {
+    border-radius: 0;
+    border: none;
+    box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.1);
+    border-left: 1px solid rgba(0,0,0,0.1);
+    height: 34px;
+}
+
+.input-group.new-ingredient-input .input-group-btn button:focus,
+.input-group.new-ingredient-input .input-group-btn button:active {
+  outline: none;
+}  
+
+.new-ingredient-input {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.nav.navbar-nav.navbar-right {
+    width: auto;
+}
+
+.nav.navbar-nav {
+    width: 500px;
+}
+
+.navbar-input {
+    width: 60%;
+    padding-top: 7px;
+    padding-left: 10px;
+}
+
+.navbar.navbar-default.navbar-static-top {
+    margin-bottom: 0;
+}
+
+.navbar-ingredients-containter {
+  width: 100%;
+  height: 200px;
+  background-color: $genericBiegeColor;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  
+  .ingredients-wrapper {
+    width: 65%;
+    margin-left: 5%;
+
+    .ingredient-tag {
+        width: 15%;
+        text-overflow: ellipsis;
+        background-color: $genericLightBlue;
+        display: inline-block;
+        margin-left: 10px;
+        text-align: center;
+        height: 30px;
+        padding-top: 5px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 200;
+        padding-left: 5px;
+        margin-top: 10px;
+
+        span {
+          position: relative;
+          float: right;
+          padding-top: 2px;
+          margin-right: 5px;
+        }
+    }
+
+    .ingredient-tag:first-child {
+      margin-left: 0;
+    }
+  } 
+
+  .ingredients-filter {
+    width: 28%;
+    .ingredient-filter-select {
+      width: 25%;
+      background-color: transparent;
+    }
+    .ingredient-filter-select:active, 
+    .ingredient-filter-select:focus {
+      outline: none;
+    }
+  }
+
+  .search-recipe-btn {
+    margin-top: 80px;
+    position: relative;
+    float: right;
+  }
+
+}
+
+.ingredient-empty-wrapper {
+  h6 {
+    font-weight: 100;
+    font-size: 14px;
+  }
+}
+
+.navbar-override-color {
+  background-color: #fff !important;
+  .navbar-brand {
+    color: #000 !important;
+  }
+}
+
+
+/**********************************
+
+          Sign up page
+
+***********************************/
+
+.sign-up-background {
+  width: 100%;
+  background: url('../assets/images/signup.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-bottom: 20px;
+}
+
+.signup-container {
+  width: 80%;
+  margin-left: 10%;
+  background-color: rgba(255,255,255,0.5);
+  margin-top: 20px;
+
+  h1 {
+    text-align: center;
+    font-weight: 100;
+  }
+
+  .signup-form-group{
+    margin-bottom: 0;
+    width: 60%;
+    margin-left: 20%;
+    input {
+      border-radius: 0;
+      border: none;
+      height: 45px;
+      font-weight: 100;
+    }
+    
+    input:focus {
+      outline: none !important;
+    }
+  }
+
+  .signup-form-group:first-child input{
+    border-top-left-radius: 5px; 
+    border-top-right-radius: 5px;
+  }
+  .signup-form-group.confirm-password input {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .signup-errors {
+    p {
+      color: #cc0000;
+      font-weight: 100;
+      text-align: center;
+    }
+  }
+
+.signup-bottom-half {
+    width: 60%;
+    margin-left: 20%;
+    .signup-btn {
+      float: right;
+      background-color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,1);
+      font-weight:  100;
+      border-radius:  0;
+    }
+    padding: 20px 0;
+  }
+}
+
+.oauth-wrapper {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+

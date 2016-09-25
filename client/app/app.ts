@@ -15,6 +15,7 @@ const uiBootstrap = require('angular-ui-bootstrap');
 import {routeConfig} from './app.config';
 
 import _Auth from '../components/auth/auth.module';
+import dmService from './dmService/dmService.service';
 import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
@@ -23,6 +24,7 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import recipielist from './recipelist/recipelist.component';
 
 
 import './app.scss';
@@ -41,10 +43,11 @@ angular.module('hackathonApp', [
   account,
   admin,  navbar,
   footer,
+  recipielist,
   main,
   constants,
   socket,
-  util
+  util, dmService
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
