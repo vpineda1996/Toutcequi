@@ -1,7 +1,7 @@
 <div class="recipe-flex-container">
     <div class="recipe-flex">
         <div class="cardContainer" ng-repeat="recipe in $ctrl.recipes">
-            <div class="author-title-container">
+            <div class="author-title-container" ng-click="$ctrl.onClick(recipe)">
                 <div class="item-image-back" style="background-image:url('{{recipe.imageBackground}}')"></div>
                 <div class="title-recipe-item">
                     <div class="name-recipe-item">
@@ -23,4 +23,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="extended-recipe" id='exended-recipe'>
+    {{$ctrl.expandedRecipe}}
 </div>
