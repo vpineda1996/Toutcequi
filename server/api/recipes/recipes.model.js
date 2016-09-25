@@ -14,7 +14,11 @@ export default function(sequelize, DataTypes) {
     imageThumbnail: DataTypes.STRING,
     servingSize: DataTypes.INTEGER,
     ingredients: DataTypes.ARRAY(DataTypes.STRING),
+    quantity: DataTypes.ARRAY(DataTypes.STRING),
+    missingIngredients: DataTypes.ARRAY(DataTypes.STRING),
     steps: DataTypes.ARRAY(DataTypes.STRING),
+    activeTime: DataTypes.STRING,
+    totalTime: DataTypes.STRING,
     imageBackground: DataTypes.STRING,
     info: DataTypes.STRING,
     active: DataTypes.BOOLEAN
