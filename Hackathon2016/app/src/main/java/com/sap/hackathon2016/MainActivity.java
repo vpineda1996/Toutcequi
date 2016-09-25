@@ -13,12 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dpizarro.autolabel.library.AutoLabelUI;
+import com.dpizarro.autolabel.library.Label;
 import com.sap.hackathon2016.managers.ApiManager;
 import com.sap.hackathon2016.models.Recipe;
 import com.sap.hackathon2016.network.RecipesService;
 import com.sap.hackathon2016.views.adapter.RecipesListAdapter;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLabelsEmptyListener {
+public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLabelsEmptyListener, AutoLabelUI.OnRemoveLabelListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
     AutoLabelUI mIngredientsGroup;
     @BindView(R.id.recipes_list)
     RecyclerView mRecipesList;
+    @BindView(R.id.tags_container)
+    RelativeLayout mTagsContainer;
     @BindView(R.id.filters_container)
     RelativeLayout mFiltersContainer;
     @BindView(R.id.threshold)
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
     private RecipesListAdapter mRecipesListAdapter;
 
     private int mThreshold = 0;
+    private List<String> mIngredients = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
 
         Picasso.with(this).load("http://lorempixel.com/400/600/food/").fit().centerCrop().into(mFoodImage);
         mIngredientsGroup.setOnLabelsEmptyListener(this);
+        mIngredientsGroup.setOnRemoveLabelListener(this);
 
         mRecipesList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecipesListAdapter = new RecipesListAdapter(this);
@@ -80,7 +86,21 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
 
     @OnClick(R.id.search_icon)
     public void onSearchIconClicked() {
+        if (!mIngredients.isEmpty()) {
+            String ingredients = TextUtils.join(",", mIngredients);
+            ApiManager.getInstance().getRecipesService().getRecipes(ingredients)
+                    .enqueue(new Callback<List<Recipe>>() {
+                        @Override
+                        public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                            mRecipesListAdapter.clearAndAddRecipes(response.body());
+                        }
 
+                        @Override
+                        public void onFailure(Call<List<Recipe>> call, Throwable t) {
+
+                        }
+                    });
+        }
     }
 
     @OnClick(R.id.add_icon)
@@ -88,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         String inputText = mSearchInput.getText().toString();
         if (!TextUtils.isEmpty(inputText)) {
             mIngredientsGroup.addLabel(inputText);
+            mIngredients.add(inputText);
             mSearchInput.setText("");
             mFiltersContainer.setVisibility(View.VISIBLE);
         }
@@ -118,5 +139,11 @@ public class MainActivity extends AppCompatActivity implements AutoLabelUI.OnLab
         mFiltersContainer.setVisibility(View.GONE);
         mThreshold = 0;
         mThresholdText.setText(getString(R.string.threshold_missing_ingredients, mThreshold));
+    }
+
+    @Override
+    public void onRemoveLabel(View view, int position) {
+        Label label = (Label) view;
+        mIngredients.remove(label.getText());
     }
 }

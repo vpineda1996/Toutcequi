@@ -53,7 +53,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         recipeViewHolder.description.setText(recipe.description);
 
         Picasso.with(mContext)
-                .load("https://graph.facebook.com/10155672444480045/picture?type=square")
+                .load(recipe.imageThumbnail)
                 .fit()
                 .centerCrop()
                 .transform(new CircleTransformation())
@@ -94,6 +94,16 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void addRecipes(List<Recipe> recipes) {
         mRecipesList.addAll(recipes);
+        for (int i = 0; i < recipes.size(); i++) {
+            mIsExpandedList.add(false);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void clearAndAddRecipes(List<Recipe> recipes) {
+        mRecipesList.clear();
+        mRecipesList.addAll(recipes);
+        mIsExpandedList.clear();
         for (int i = 0; i < recipes.size(); i++) {
             mIsExpandedList.add(false);
         }
