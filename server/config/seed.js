@@ -81,7 +81,7 @@ var data = [
       'rating': 5,
       'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
       'imageBackground': 'https://enrootmeals.com/images/gallery/sBrisketPlate-1473818006.jpg',
-      'ingredients': [],
+      'ingredients': ['pork'],
       'steps': []
     },
     {
@@ -91,7 +91,7 @@ var data = [
       'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
       'imageBackground': 'http://www.seriouseats.com/recipes/assets_c/2016/08/20160703-Grilled-Lemon-Garlic-Chicken-Tomato-Kebabs-Basil-Chimichurri-emily-matt-clifton-7-thumb-1500xauto-433447.jpg',
       'servingSize': 4,
-      'ingredients': [],
+      'ingredients': ['chicken','tomato','lemon'],
       'steps': [],
     },
     {
@@ -121,7 +121,7 @@ var data = [
       'imageThumbnail': 'http://www.translationwebshop.com/wp-content/themes/translationwebshop/images/img_placeholder_avatar.jpg',
       'imageBackground': 'http://www.seriouseats.com/recipes/assets_c/2016/08/20160703-Quick-Marinated-White-Bean-Salad-Feta-Lettuce-Cups-Emily-Matt-Clifton-3-thumb-1500xauto-433449.jpg',
       'servingSize': 4,
-      'ingredients': [],
+      'ingredients': ['white bean','feta cheese','lettuce','pork'],
       'steps': [],
     }
 
